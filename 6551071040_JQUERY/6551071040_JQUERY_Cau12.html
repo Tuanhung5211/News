@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Câu 12</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+$(document).ready(function() {
+
+    $("#passport-info").css("display", "none");
+    $("#creditcard-info").css("display", "none");
+
+    $("input[name='passport']").change(function() {
+        if ($(this).val() === "yes") {
+            $("#passport-info").css("display", "block");
+        } else {
+            $("#passport-info").css("display", "none");
+        }
+    });
+
+    $("input[name='creditcard']").change(function() {
+        if ($(this).val() === "yes") {
+            $("#creditcard-info").css("display", "block");
+        } else {
+            $("#creditcard-info").css("display", "none");
+        }
+    });
+
+});
+</script>
+</head>
+
+<body>
+
+<h3>Passport</h3>
+<label><input type="radio" name="passport" value="yes"> Yes</label>
+<label><input type="radio" name="passport" value="no"> No</label>
+<div id="passport-info">
+    <input type="text" placeholder="Nhập số Passport">
+</div>
+
+<h3>Credit Card</h3>
+<label><input type="radio" name="creditcard" value="yes"> Yes</label>
+<label><input type="radio" name="creditcard" value="no"> No</label>
+<div id="creditcard-info">
+    <input type="text" placeholder="Nhập số thẻ Credit Card">
+</div>
+
+</body>
+</html>

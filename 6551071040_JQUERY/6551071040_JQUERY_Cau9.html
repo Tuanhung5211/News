@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Cau9</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<h3>Personal Information</h3>
+
+<form id="infoForm">
+  Enter name*: <input type="text" id="name"><br><br>
+
+  Sex*: 
+  <input type="radio" name="sex" value="Male">Male
+  <input type="radio" name="sex" value="Female">Female<br><br>
+
+  Enter email address*: <input type="text" id="email"><br><br>
+
+  Enter birthday (MM/DD/YYYY)*: <input type="text" id="birthday"><br><br>
+
+  Enter street address (line 1)*: <input type="text" id="address"><br><br>
+
+  Enter city*: <input type="text" id="city"><br><br>
+
+  Select a region*: 
+  <select id="region">
+    <option value="">--Select--</option>
+    <option value="A">VietNam</option>
+  </select><br><br>
+
+  Enter 5-digit ZIP code*: <input type="text" id="zip"><br><br>
+
+  <button type="button" id="finish">Finished</button>
+  <button type="button" id="clear">Clear</button>
+</form>
+
+<script>
+$(document).ready(function() {
+
+  // Xoá tất cả 
+  $("#clear").click(function() {
+    $("#infoForm")[0].reset();
+  });
+
+  // kiểm tra dữ liệu
+  $("#finish").click(function() {
+    let name = $("#name").val().trim();
+    let sex = $("input[name='sex']:checked").val();
+    let email = $("#email").val().trim();
+    let birthday = $("#birthday").val().trim();
+    let address = $("#address").val().trim();
+    let city = $("#city").val().trim();
+    let region = $("#region").val();
+    let zip = $("#zip").val().trim();
+
+    // Kiểm tra chỗ trống
+    if (!name || !sex || !email || !birthday || !address || !city || !region || !zip) {
+      alert("Không được để trống các ô có *");
+      return;
+    }
+
+    // Kiểm tra email
+    let emailPattern = /^    [^@]+    @     [^@]+    \.     [^@]+     $/;
+    if (!emailPattern.test(email)) {
+      alert("Email không hợp lệ");
+      return;
+    }
+
+    // Kiểm tra ngày sinh 
+    //                   Tháng              / hoặc -            Ngày                   / hoặc -        Năm
+    let datePattern = /^(0?[1-9]|1[0-2])    [\/\-]     (0?[1-9]|[12][0-9]|3[01])        [\/\-]        (\d{4})$/;
+    if (!datePattern.test(birthday)) {
+      alert("Ngày sinh không hợp lệ");
+      return;
+    }
+    let parts = birthday.includes("/") ? birthday.split("/") : birthday.split("-");
+    let month = parseInt(parts[0]);
+    let day = parseInt(parts[1]);
+    let year = parseInt(parts[2]);
+    let nowYear = new Date().getFullYear();
+    if (year >= nowYear || month < 1 || month > 12 || day < 1 || day > 31) {
+      alert("Ngày sinh không hợp lệ");
+      return;
+    }
+
+    // Kiểm tra ZIP (5 chữ số)
+    if (!/^\d{5}$/.test(zip)) {
+      alert("Zip code phải có đúng 5 chữ số");
+      return;
+    }
+
+    alert("Đã nhập thành công");
+  });
+
+});
+</script>
+
+</body>
+</html>

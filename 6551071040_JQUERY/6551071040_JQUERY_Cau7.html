@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 7</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function()
+        {
+            $("#linkForm").submit(function(e)
+            {
+                e.preventDefault();
+                var link = $("#linkInput").val().trim();
+                if(link === "")
+            {
+                alert("Vui lòng nhập!");
+                return;
+            }
+                if(confirm("Bạn muốn đi đén: " + link + "?"));
+                {
+                    window.location.href = link;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Nhập đường link và nhấn "Submit" để chuyển hướng:</h1> 
+    <form id="linkForm"> 
+        <input type="text" id="linkInput" placeholder="Nhập đường link"> 
+        <button type="submit">Submit</button> 
+    </form> 
+</body>
+</html>

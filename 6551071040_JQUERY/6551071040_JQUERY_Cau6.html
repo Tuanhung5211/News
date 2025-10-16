@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 6</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    
+</head>
+<body>
+    <form>Chọn màu yêu thích của bạn:</form>
+    <select id="mySelect">
+        <option>Red</option>
+        <option>Blue</option>
+        <option>Green</option>
+        <option>White</option>
+        <option>Gray</option>
+    </select>
+    <script>
+        $(document).ready(function() {
+           
+            $("body").css({
+                "font-family": "Arial, sans-serif",
+                "padding": "20px"
+            });
+
+            $("select, input").css({
+                "margin-top": "10px",
+                "padding": "5px"
+            });
+
+            $("#btnShow").click(function() {
+                var options = $("#mySelect option");
+                var result = "";
+
+                options.each(function(index) {
+                    result += (index + 1) + ". " + $(this).text() + "\n";
+                });
+
+                alert(result);
+            });
+        });
+    </script>
+    <input type="button" id="btnShow" value="Hiển thị tất cả mục">
+</body>
+</html>
