@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Bài 16 - Add/Delete Row jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+        th, td { border: 1px solid #555; padding: 8px; text-align: center; }
+        input { margin: 5px; }
+        button { margin: 5px; }
+    </style>
+</head>
+<body>
+    <h3>Nhập thông tin</h3>
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="date" id="birthdate">
+    <button id="addRow">Add Row</button>
+    <button id="deleteRow">Delete Row</button>
+
+    <table id="dataTable">
+        <thead>
+            <tr>
+                <th>Chọn</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Birthdate</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        $(document).ready(function(){
+            $("#addRow").click(function(){
+                var name = $("#name").val().trim();
+                var email = $("#email").val().trim();
+                var birthdate = $("#birthdate").val();
+
+                if(name === "" || email === "" || birthdate === ""){
+                    alert("Vui lòng nhập đầy đủ thông tin!");
+                    return;
+                }
+
+                var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+                if(!emailPattern.test(email)){
+                    alert("Email không hợp lệ!");
+                    return;
+                }
+
+                var newRow = `
+                    <tr>
+                        <td><input type="checkbox" class="rowCheck"></td>
+                        <td>${name}</td>
+                        <td>${email}</td>
+                        <td>${birthdate}</td>
+                    </tr>`;
+                $("#dataTable tbody").append(newRow);
+
+                $("#name").val("");
+                $("#email").val("");
+                $("#birthdate").val("");
+            });
+
+            $("#deleteRow").click(function(){
+                $(".rowCheck:checked").each(function(){
+                    $(this).closest("tr").remove();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
